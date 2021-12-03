@@ -15,7 +15,7 @@ func main() {
 }
 
 func run() error {
-	in, err := os.ReadFile("input.1")
+	in, err := os.ReadFile("in.1")
 	if err != nil {
 		return err
 	}
