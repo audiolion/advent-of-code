@@ -1,5 +1,5 @@
 from os import path
-
+import heapq
 
 basepath = path.dirname(__file__)
 
@@ -8,23 +8,15 @@ def run():
         input = f.read()
 
     inventories = input.split("\n\n")
-    maxes = [0, 0, 0]
+    maxes = [-3,-2,-1]
     for inventory in inventories:
         items = [int(item) for item in inventory.split("\n")]
         total_calories = sum(items)
+        heapq.heappushpop(maxes, total_calories)
 
-        for i, max in enumerate(maxes):
-            if total_calories > max:
-                tmp, maxes[i] = maxes[i], total_calories
-                for j in range(i+1, len(maxes)):
-                    if tmp > maxes[j]:
-                        tmp, maxes[j] = maxes[j], tmp
-                break
+    print(heapq.nlargest(1, maxes)[0])
 
-
-    print(maxes[0])
-
-    print(sum(maxes))
+    print(sum(heapq.nlargest(3, maxes)))
 
 
 if __name__ == "__main__":
