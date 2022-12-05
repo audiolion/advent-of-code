@@ -27,20 +27,16 @@ def parse_stacks(stack_data):
                 stacks.append([])
             continue
 
-        imputed_len = len(stacks) * 3 + len(stacks) - 1
-        imputed = f"{line}{(imputed_len - len(line)) * ' '}"
+        pad_length = len(stacks) * 3 + len(stacks) - 1 - len(line)
+        padded = f"{line}{pad_length * ' '}"
+
         i = 0
-        while i < len(imputed):
-            if imputed[i:i+3] == "   ":
-                imputed = f"{imputed[0:i]}[_]{imputed[i+3:len(imputed)]}"
+        j = 0
+        while i < len(padded):
+            if padded[i:i+3] != "   ":
+                stacks[j].append(padded[i:i+3])
             i += 4
-
-        crates = imputed.split(" ")
-        for i, crate in enumerate(crates):
-            stacks[i].append(crate)
-
-    for i, stack in enumerate(stacks):
-        stacks[i] = [s for s in stack if s != "[_]"]
+            j += 1
 
     return stacks
 
