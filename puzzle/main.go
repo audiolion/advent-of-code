@@ -9,7 +9,6 @@ import (
 	"net/http"
 	"os"
 	"strconv"
-	"strings"
 	"time"
 )
 
@@ -66,7 +65,7 @@ func run() error {
 		return err
 	}
 
-	puzzle = []byte(strings.TrimSpace(string(puzzle)))
+	puzzle = []byte(string(puzzle))
 
 	if len(*output) == 0 {
 		fmt.Fprintf(os.Stdout, "%s", puzzle)
