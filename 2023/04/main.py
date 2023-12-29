@@ -26,10 +26,9 @@ for line in lines:
     p1 += total
 
 
-    for k in range(card+1, card+1+matches):
-        copies = V[card]
-        V[k] += 1 + copies
     V[card] += 1
+    for k in range(matches):
+        V[card+1+k] += V[card]
 
 p2 = sum(V.values())
 
